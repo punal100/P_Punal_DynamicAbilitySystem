@@ -44,3 +44,59 @@ public:
 	//#- Variables #-
 	//~ ~
 };
+
+USTRUCT(BlueprintType)
+struct FStruct_PDAS_Attribute_Named : public FTableRowBase
+{
+	GENERATED_BODY()
+
+public:
+
+	//~ ~
+	//#+ Variables #+
+	//#++ Variables-Base #++
+	//#==
+
+	//Punal Manalan,
+	//NOTE: 
+	//Contains Attribute Name and Attribute Value
+
+	//Punal Manalan, NOTE: Attribute Name
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "_APP|Struct|PDAS|Attribute")
+	FString Name = "Default";
+
+	//Punal Manalan, NOTE: Attribute Value
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "_APP|Struct|PDAS|Attribute")
+	FStruct_PDAS_Attribute Attribute;
+
+	//#==
+	//#-- Variables-Base #--
+	//#- Variables #-
+	//~ ~
+};
+
+USTRUCT(BlueprintType)
+struct FStruct_PDAS_Attributes_Map_By_Name
+{
+	GENERATED_BODY()
+
+public:
+
+	//~ ~
+	//#+ Variables #+
+	//#++ Variables-Base #++
+	//#==
+
+	//Punal Manalan,
+	//NOTE: 
+	//Contains Map of ttributes Map by Name(FString)
+
+	//Punal Manalan, NOTE: Attributes Map by Name(FString)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "_APP|Struct|PDAS|Attribute")
+	TMap<FString,FStruct_PDAS_Attribute Attribute> Attributes;
+
+	//#==
+	//#-- Variables-Base #--
+	//#- Variables #-
+	//~ ~
+};
