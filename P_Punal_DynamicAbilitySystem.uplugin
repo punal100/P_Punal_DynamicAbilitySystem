@@ -13,5 +13,12 @@
 	"CanContainContent": true,
 	"IsBetaVersion": false,
 	"IsExperimentalVersion": false,
-	"Installed": false
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "P_Punal_DynamicAbilitySystem",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	]
 }

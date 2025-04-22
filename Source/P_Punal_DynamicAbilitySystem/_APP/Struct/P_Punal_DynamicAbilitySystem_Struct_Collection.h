@@ -93,7 +93,7 @@ public:
 
 	//Punal Manalan, NOTE: Attributes Map by Name(FString)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "_APP|Struct|PDAS|Attribute")
-	TMap<FString,FStruct_PDAS_Attribute Attribute> Attributes;
+	TMap<FString,FStruct_PDAS_Attribute> Attributes;
 
 	//#==
 	//#-- Variables-Base #--

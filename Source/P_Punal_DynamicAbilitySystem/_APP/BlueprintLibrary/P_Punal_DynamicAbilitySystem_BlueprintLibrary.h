@@ -25,7 +25,7 @@ public:
 
 	//Punal Manalan, NOTE: Get Test
 	UFUNCTION(BlueprintCallable, Category = "_APP|BlueprintLibrary|PDAS|Test")
-		static void Get_Test();
+		static void Punal_PDAS_Test();
 	//#==
 	//#-- Functions-Struct #--
 	//#- Functions #-
