@@ -20,3 +20,10 @@ enum class EEnum_PDAS_Math_Operation : uint8
     Multiply  UMETA(DisplayName = "Multiply"),
     Divide    UMETA(DisplayName = "Divide")
 };
+
+UENUM(BlueprintType)
+enum class EEnum_PDAS_Math_Calculation : uint8
+{
+    Absolute    UMETA(DisplayName = "Absolute"),
+    Scale       UMETA(DisplayName = "Scale"),
+};
