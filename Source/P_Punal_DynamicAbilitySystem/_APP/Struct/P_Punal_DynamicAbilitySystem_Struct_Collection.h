@@ -56,11 +56,15 @@ public:
 
 	//Punal Manalan,
 	//NOTE: 
-	//Contains Attribute Modifier and Attribute Value
+	//Contains Attribute Modifiers and Attribute Value
 
 	//Punal Manalan, NOTE: Attribute Name
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "_APP|Struct|PDAS|Attribute")
-	EEnum_PDAS_Math_Operation Modifier = EEnum_PDAS_Math_Operation::Add;
+	EEnum_PDAS_Math_Operation Operation_Modifier = EEnum_PDAS_Math_Operation::Add;
+
+	//Punal Manalan, NOTE: Attribute Name
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "_APP|Struct|PDAS|Attribute")
+	EEnum_PDAS_Math_Calculation Calculation_Modifier = EEnum_PDAS_Math_Calculation::Absolute;
 
 	//Punal Manalan, NOTE: Attribute Value
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "_APP|Struct|PDAS|Attribute")
@@ -203,7 +207,7 @@ public:
 	//Punal Manalan, NOTE: Script to Check if usable, This Script is Run First, Usually JSON Script
 	//For Example This is Usable, but in Certain Parts of Map it Can not Be, or If Different Team
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "_APP|Struct|PDAS|Condition")
-	FString Ability_Usable_Check_By_Script = "{}";
+	FString Usable_Check_By_Script = "{}";
 
 	//Punal Manalan, NOTE: If These Tags are Present Then Blocking Tags Check is Fully Ignored.
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "_APP|Struct|PDAS|Condition")
@@ -249,7 +253,7 @@ public:
 
 	//Punal Manalan, NOTE: Ability Cost by Stats
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "_APP|Struct|PDAS|Ability")
-	FStruct_PDAS_Attributes_Map_By_Name Cost_By_Stats;
+	FStruct_PDAS_Attribute_With_Modifiers_Map_By_Name Cost_By_Stats;
 
 	//Punal Manalan, NOTE: Ability Cost by Script, Usually JSON Script
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "_APP|Struct|PDAS|Ability")
@@ -281,6 +285,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "_APP|Struct|PDAS|Ability")
 	FStruct_PDAS_Use_Eligibility Required_Eligibility;
 
+	//Punal Manalan, NOTE: Ability Eligibility by Stats, Same as Cost but Only Check if Required Stats are there
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "_APP|Struct|PDAS|Ability")
+	FStruct_PDAS_Attribute_With_Modifiers_Map_By_Name Eligibility_By_Stats;
+
 	//Punal Manalan, NOTE: Ability Effect by Stats
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "_APP|Struct|PDAS|Ability")
 	FStruct_PDAS_Attributes_Map_By_Name Effect_By_Stats;
@@ -291,6 +299,70 @@ public:
 
 	//Punal Manalan, NOTE: Ability Tags Applied By Effect(Tags Exists Until This Effect Exists)
 	TArray<FString> Tags_To_Apply;
+
+	//#==
+	//#-- Variables-Base #--
+	//#- Variables #-
+	//~ ~
+};
+
+USTRUCT(BlueprintType)
+struct FStruct_PDAS_Instant_Ability_Effect : public FTableRowBase
+{
+	GENERATED_BODY()
+
+public:
+
+	//~ ~
+	//#+ Variables #+
+	//#++ Variables-Base #++
+	//#==
+
+	//Punal Manalan,
+	//NOTE: 
+	//Contains Ability Effect
+
+	//Punal Manalan, NOTE: Required Eligibility in order for this Effect to be Applied
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "_APP|Struct|PDAS|Ability")
+	FStruct_PDAS_Ability_Effect Ability_Effect;
+
+	//#==
+	//#-- Variables-Base #--
+	//#- Variables #-
+	//~ ~
+};
+
+USTRUCT(BlueprintType)
+struct FStruct_PDAS_Periodic_Ability_Effect : public FTableRowBase
+{
+	GENERATED_BODY()
+
+public:
+
+	//~ ~
+	//#+ Variables #+
+	//#++ Variables-Base #++
+	//#==
+
+	//Punal Manalan,
+	//NOTE: 
+	//Contains Ability Effect
+
+	//Punal Manalan, NOTE: Required Eligibility in order for this Effect to be Applied
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "_APP|Struct|PDAS|Ability")
+	FStruct_PDAS_Ability_Effect Ability_Effect;
+
+	//Punal Manalan, NOTE: Maximum Amount of times this Effect can be Applied
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "_APP|Struct|PDAS|Ability")
+	int Tick_Count = 4;
+
+	//Punal Manalan, NOTE: Interval in MilliSeconds Before each time this is Applied
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "_APP|Struct|PDAS|Ability")
+	float Tick_Interval = 1000;
+
+	//Punal Manalan, NOTE: Should Apply this Effect on Start, When this Ability Effect is Initially Applied.
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "_APP|Struct|PDAS|Ability")
+	bool Apply_First_Tick_On_Initial = true;
 
 	//#==
 	//#-- Variables-Base #--
@@ -320,11 +392,19 @@ public:
 
 	//Punal Manalan, NOTE: Ability Instant Effects on the Caster(Owner)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "_APP|Struct|PDAS|Ability")
-	FStruct_PDAS_Ability_Effect Caster_Instant_Effect;
+	FStruct_PDAS_Instant_Ability_Effect Caster_Instant_Effect;
 
 	//Punal Manalan, NOTE: Ability Instant Effects on the Caster(Owner)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "_APP|Struct|PDAS|Ability")
-	FStruct_PDAS_Ability_Effect Caster_Duration_Effect;
+	FStruct_PDAS_Periodic_Ability_Effect Caster_Duration_Effect;
+
+	//Punal Manalan, NOTE: Ability Instant Effects on the Target(If Any Selected, Otherwise Ignored)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "_APP|Struct|PDAS|Ability")
+	FStruct_PDAS_Instant_Ability_Effect Target_Instant_Effect;
+
+	//Punal Manalan, NOTE: Ability Instant Effects on the Target(If Any Selected, Otherwise Ignored)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "_APP|Struct|PDAS|Ability")
+	FStruct_PDAS_Periodic_Ability_Effect Target_Duration_Effect;
 
 	//#==
 	//#-- Variables-Base #--
