@@ -232,6 +232,40 @@ public:
 };
 
 USTRUCT(BlueprintType)
+struct FStruct_PDAS_Ability_Cost : public FTableRowBase
+{
+	GENERATED_BODY()
+
+public:
+
+	//~ ~
+	//#+ Variables #+
+	//#++ Variables-Base #++
+	//#==
+
+	//Punal Manalan,
+	//NOTE: 
+	//Contains Ability Cost
+
+	//Punal Manalan, NOTE: Required Eligibility in order to Use this Ability
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "_APP|Struct|PDAS|Ability")
+	FStruct_PDAS_Use_Eligibility Required_Eligibility;
+
+	//Punal Manalan, NOTE: Ability Cost by Stats
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "_APP|Struct|PDAS|Ability")
+	FStruct_PDAS_Attribute_With_Modifiers_Map_By_Name Cost_By_Stats;
+
+	//Punal Manalan, NOTE: Ability Cost by Script, Usually JSON Script
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "_APP|Struct|PDAS|Ability")
+	FString Cost_By_Script = "{}";
+
+	//#==
+	//#-- Variables-Base #--
+	//#- Variables #-
+	//~ ~
+};
+
+USTRUCT(BlueprintType)
 struct FStruct_PDAS_Effect : public FTableRowBase
 {
 	GENERATED_BODY()
@@ -273,7 +307,7 @@ public:
 };
 
 USTRUCT(BlueprintType)
-struct FStruct_PDAS_Ability_Cost : public FTableRowBase
+struct FStruct_PDAS_Effect_Targeting_Collections : public FTableRowBase
 {
 	GENERATED_BODY()
 
@@ -286,49 +320,15 @@ public:
 
 	//Punal Manalan,
 	//NOTE: 
-	//Contains Ability Cost
-
-	//Punal Manalan, NOTE: Required Eligibility in order to Use this Ability
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "_APP|Struct|PDAS|Ability")
-	FStruct_PDAS_Use_Eligibility Required_Eligibility;
-
-	//Punal Manalan, NOTE: Ability Cost by Stats
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "_APP|Struct|PDAS|Ability")
-	FStruct_PDAS_Attribute_With_Modifiers_Map_By_Name Cost_By_Stats;
-
-	//Punal Manalan, NOTE: Ability Cost by Script, Usually JSON Script
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "_APP|Struct|PDAS|Ability")
-	FString Cost_By_Script = "{}";
-
-	//#==
-	//#-- Variables-Base #--
-	//#- Variables #-
-	//~ ~
-};
-
-USTRUCT(BlueprintType)
-struct FStruct_PDAS_Ability_Effect : public FTableRowBase
-{
-	GENERATED_BODY()
-
-public:
-
-	//~ ~
-	//#+ Variables #+
-	//#++ Variables-Base #++
-	//#==
-
-	//Punal Manalan,
-	//NOTE: 
-	//Contains Ability Effect
+	//Contains Multiple Effect Types
 
 	//Punal Manalan, NOTE: Required Eligibility in order for this Effect to be Applied
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "_APP|Struct|PDAS|Ability")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "_APP|Struct|PDAS|Effect")
 	FStruct_PDAS_Effect Self_Effect;
 
 	//Punal Manalan, NOTE: Required Eligibility in order for this Effect to be Applied
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "_APP|Struct|PDAS|Ability")
-	FStruct_PDAS_Effect AOE_Effect;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "_APP|Struct|PDAS|Effect")
+	FStruct_PDAS_Effect AOE_Effect;//Punal Manalan, TODO: Add AOE Parameters for this
 
 	//#==
 	//#-- Variables-Base #--
@@ -337,7 +337,7 @@ public:
 };
 
 USTRUCT(BlueprintType)
-struct FStruct_PDAS_Instant_Ability_Effect : public FTableRowBase
+struct FStruct_PDAS_Instant_Effect : public FTableRowBase
 {
 	GENERATED_BODY()
 
@@ -350,11 +350,11 @@ public:
 
 	//Punal Manalan,
 	//NOTE: 
-	//Contains Ability Effect
+	//Contains Instant Effect
 
-	//Punal Manalan, NOTE: Required Eligibility in order for this Effect to be Applied
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "_APP|Struct|PDAS|Ability")
-	FStruct_PDAS_Ability_Effect Ability_Effect;
+	//Punal Manalan, NOTE: Effect to Apply
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "_APP|Struct|PDAS|Effect")
+	FStruct_PDAS_Effect_Types Effect;
 
 	//#==
 	//#-- Variables-Base #--
@@ -363,7 +363,7 @@ public:
 };
 
 USTRUCT(BlueprintType)
-struct FStruct_PDAS_Periodic_Ability_Effect : public FTableRowBase
+struct FStruct_PDAS_Periodic_Effect : public FTableRowBase
 {
 	GENERATED_BODY()
 
@@ -376,23 +376,53 @@ public:
 
 	//Punal Manalan,
 	//NOTE: 
-	//Contains Ability Effect
+	//Contains Periodic Effect
 
-	//Punal Manalan, NOTE: Required Eligibility in order for this Effect to be Applied
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "_APP|Struct|PDAS|Ability")
-	FStruct_PDAS_Ability_Effect Ability_Effect;
+	//Punal Manalan, NOTE: Effect to Apply
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "_APP|Struct|PDAS|Effect")
+	FStruct_PDAS_Effect_Types Effect;
 
 	//Punal Manalan, NOTE: Maximum Amount of times this Effect can be Applied
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "_APP|Struct|PDAS|Ability")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "_APP|Struct|PDAS|Effect")
 	int Tick_Count = 4;
 
 	//Punal Manalan, NOTE: Interval in MilliSeconds Before each time this is Applied
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "_APP|Struct|PDAS|Ability")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "_APP|Struct|PDAS|Effect")
 	float Tick_Interval = 1000;
 
-	//Punal Manalan, NOTE: Should Apply this Effect on Start, When this Ability Effect is Initially Applied.
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "_APP|Struct|PDAS|Ability")
+	//Punal Manalan, NOTE: Should Apply this Effect on Start, When this Effect is Initially Applied.
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "_APP|Struct|PDAS|Effect")
 	bool Apply_First_Tick_On_Initial = true;
+
+	//#==
+	//#-- Variables-Base #--
+	//#- Variables #-
+	//~ ~
+};
+
+USTRUCT(BlueprintType)
+struct FStruct_PDAS_Effect_Application_Collection : public FTableRowBase
+{
+	GENERATED_BODY()
+
+public:
+
+	//~ ~
+	//#+ Variables #+
+	//#++ Variables-Base #++
+	//#==
+
+	//Punal Manalan,
+	//NOTE: 
+	//Contains Ability Effect
+
+	//Punal Manalan, NOTE: Required Eligibility in order for this Effect to be Applied
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "_APP|Struct|PDAS|Effect")
+	FStruct_PDAS_Instant_Effect Instant_Effect;
+
+	//Punal Manalan, NOTE: Required Eligibility in order for this Effect to be Applied
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "_APP|Struct|PDAS|Effect")
+	FStruct_PDAS_Periodic_Effect Periodic_Effect;
 
 	//#==
 	//#-- Variables-Base #--
