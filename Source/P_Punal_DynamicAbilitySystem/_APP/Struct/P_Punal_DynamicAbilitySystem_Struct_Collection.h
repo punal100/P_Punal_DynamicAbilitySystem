@@ -232,6 +232,47 @@ public:
 };
 
 USTRUCT(BlueprintType)
+struct FStruct_PDAS_Effect : public FTableRowBase
+{
+	GENERATED_BODY()
+
+public:
+
+	//~ ~
+	//#+ Variables #+
+	//#++ Variables-Base #++
+	//#==
+
+	//Punal Manalan,
+	//NOTE: 
+	//Contains Effect
+
+	//Punal Manalan, NOTE: Required Eligibility in order for this Effect to be Applied
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "_APP|Struct|PDAS|Effect")
+	FStruct_PDAS_Use_Eligibility Required_Eligibility;
+
+	//Punal Manalan, NOTE: Eligibility by Stats, Same as Cost but Only Check if Required Stats are there
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "_APP|Struct|PDAS|Effect")
+	FStruct_PDAS_Attribute_With_Modifiers_Map_By_Name Eligibility_By_Stats;
+
+	//Punal Manalan, NOTE: Effect by Stats
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "_APP|Struct|PDAS|Effect")
+	FStruct_PDAS_Attributes_Map_By_Name Effect_By_Stats;
+
+	//Punal Manalan, NOTE: Effect by Script, Usually JSON Script
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "_APP|Struct|PDAS|Effect")
+	FString Effect_By_Script = "{}";
+
+	//Punal Manalan, NOTE: Tags Applied By Effect(Tags Exists Until This Effect Exists)
+	TArray<FString> Tags_To_Apply;
+
+	//#==
+	//#-- Variables-Base #--
+	//#- Variables #-
+	//~ ~
+};
+
+USTRUCT(BlueprintType)
 struct FStruct_PDAS_Ability_Cost : public FTableRowBase
 {
 	GENERATED_BODY()
@@ -283,22 +324,11 @@ public:
 
 	//Punal Manalan, NOTE: Required Eligibility in order for this Effect to be Applied
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "_APP|Struct|PDAS|Ability")
-	FStruct_PDAS_Use_Eligibility Required_Eligibility;
+	FStruct_PDAS_Effect Self_Effect;
 
-	//Punal Manalan, NOTE: Ability Eligibility by Stats, Same as Cost but Only Check if Required Stats are there
+	//Punal Manalan, NOTE: Required Eligibility in order for this Effect to be Applied
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "_APP|Struct|PDAS|Ability")
-	FStruct_PDAS_Attribute_With_Modifiers_Map_By_Name Eligibility_By_Stats;
-
-	//Punal Manalan, NOTE: Ability Effect by Stats
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "_APP|Struct|PDAS|Ability")
-	FStruct_PDAS_Attributes_Map_By_Name Effect_By_Stats;
-
-	//Punal Manalan, NOTE: Ability Effect by Script, Usually JSON Script
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "_APP|Struct|PDAS|Ability")
-	FString Effect_By_Script = "{}";
-
-	//Punal Manalan, NOTE: Ability Tags Applied By Effect(Tags Exists Until This Effect Exists)
-	TArray<FString> Tags_To_Apply;
+	FStruct_PDAS_Effect AOE_Effect;
 
 	//#==
 	//#-- Variables-Base #--
