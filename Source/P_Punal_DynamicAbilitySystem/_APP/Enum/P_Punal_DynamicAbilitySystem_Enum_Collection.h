@@ -27,3 +27,27 @@ enum class EEnum_PDAS_Math_Calculation : uint8
     Absolute    UMETA(DisplayName = "Absolute"),
     Scale       UMETA(DisplayName = "Scale"),
 };
+
+UENUM(BlueprintType)
+enum class EEnum_PDAS_AOE_Location_Start_Type : uint8
+{
+    Caster         UMETA(DisplayName = "Caster"),
+    Target         UMETA(DisplayName = "Target"),
+    Location       UMETA(DisplayName = "Location"),
+};
+
+UENUM(BlueprintType)
+enum class EEnum_PDAS_AOE_Location_Move_Type : uint8
+{
+    Caster         UMETA(DisplayName = "Caster"),
+    Target         UMETA(DisplayName = "Target"),
+    Location       UMETA(DisplayName = "Location"),
+};
+
+UENUM(BlueprintType)
+enum class EEnum_PDAS_AOE_Location_End_Type : uint8
+{
+    Caster         UMETA(DisplayName = "Caster"),
+    Target         UMETA(DisplayName = "Target"),
+    Location       UMETA(DisplayName = "Location"),
+};
